@@ -25,9 +25,9 @@ import React from 'react';
     return (
     <div>
     <table>
-    <tbody>
-    {this.getRowsData()}
-    </tbody>
+      <tbody>
+        {this.getRowsData()}
+      </tbody>
     </table>
     </div>
     
