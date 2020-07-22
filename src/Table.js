@@ -16,7 +16,11 @@ const TableBody = (props) => {
         return (
             <tr key={index}>
                 <td>{row.id}</td>
-                <td>{row.value}</td>
+                <td><input type="text" value={row.value} disabled="true"></input></td>
+                <td>
+                    &nbsp;<button type="button">Edit</button>&nbsp;&nbsp;
+                    <button type="button">Delete</button>
+                </td>
             </tr>
         )
     })
