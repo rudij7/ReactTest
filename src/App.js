@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Table from './Table';
-import tableData from './tableData.json';
-
-const text = "React";
+import tableData from './tableData7Records.json';
 
 class App extends Component {
     render() {
