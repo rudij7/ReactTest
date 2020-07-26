@@ -3,9 +3,25 @@ import Table from './Table';
 import tableData from './tableData7Records.json';
 
 class App extends Component {
-    state = {
-        tableData
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            tableData
+            
+        };
+
+    }
+
+    handleChange = (value, index, id) => {    
+    
+        console.log(value)
+        const newTableData = [
+            ...tableData.slice(0, index),{id:id, value:value},
+            ...tableData.slice(index+1)
+          ];
+        this.setState({tableData: newTableData});  
+    }
+
 
     removeData = (index) => {
         const { tableData } = this.state;
@@ -22,7 +38,7 @@ class App extends Component {
 
         return (
             <div className="container">
-                <Table tableData={tableData} removeData={this.removeData} />
+                <Table tableData={tableData} removeData={this.removeData} handleChange={this.handleChange} />
             </div>
         )
     };

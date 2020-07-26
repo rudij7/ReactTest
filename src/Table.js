@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 
 const TableHeader = () => {
     return (
@@ -12,28 +12,49 @@ const TableHeader = () => {
 };
 
 const TableBody = (props) => {
-    const rows = props.characterData.map((row, index) => {
-        return (
-            <tr key={index}>
-                <td>{row.id}</td>
-                <td>{row.value}</td>
+
+    const [buttonText, setButtonText] = useState("Edit");
+
+    const [thing, setThing] = useState(props.thing.value);
+    const [disabled, setDisabled] = useState(true);
+    function editText() {
+        setDisabled(!disabled);
+        if(disabled)
+        setButtonText("Save");
+        else {
+            props.handleChange(thing, props.index, props.thing.id)
+          
+            setButtonText("Edit")
+
+        }
+        
+        
+    }
+    const rows =  (
+            <tr>
+                <td>{props.thing.id}</td>
+        <td><input type="text" value={thing} onChange={e =>setThing(e.target.value)} disabled={disabled}></input></td>
                 <td>
-                    <button onClick={() => props.removeData(index)}>Delete</button>
+                    &nbsp;<button onClick={editText}>{buttonText}</button>&nbsp;&nbsp;
+                    <button onClick={props.removeData}>Delete</button>
                 </td>
             </tr>
         )
-    })
+    
 
     return <tbody>{rows}</tbody>
 };
 
 const Table = (props) => {
-    const { tableData, removeData } = props
-
+    const { tableData, removeData, handleChange } = props
+    console.log(tableData);
     return (
+      
         <table>
             <TableHeader />
-            <TableBody characterData={tableData} removeData={removeData} />
+    {props.tableData.map((row, index) => <TableBody index={index} key={index} thing={row} removeData={() => removeData(index)} handleChange={handleChange} /> )}
+        
+            
         </table>
     )
 }
