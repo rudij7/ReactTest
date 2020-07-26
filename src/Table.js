@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component } from 'react'
 
 const TableHeader = () => {
     return (
@@ -12,37 +12,30 @@ const TableHeader = () => {
 };
 
 const TableBody = (props) => {
-    const [disabled, setDisabled] = useState(true);
-
-    function editText() {
-        setDisabled(!disabled);
-    }
-
-    const rows = props.tableData.map((row, index) => {
+    const rows = props.characterData.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.id}</td>
-                <td><input type="text" value={row.value} disabled={disabled}></input></td>
+                <td>{row.value}</td>
                 <td>
-                    <button type="button" onClick={editText}>Edit</button>&nbsp;&nbsp;
-                    <button type="button">Delete</button>
+                    <button onClick={() => props.removeData(index)}>Delete</button>
                 </td>
             </tr>
         )
     })
+
     return <tbody>{rows}</tbody>
 };
 
-class Table extends Component {
-    render() {
-        const { tableData } = this.props
-        return (
-            <table>
-                <TableHeader />
-                <TableBody tableData={tableData} />
-            </table>
-        )
-    }
+const Table = (props) => {
+    const { tableData, removeData } = props
+
+    return (
+        <table>
+            <TableHeader />
+            <TableBody characterData={tableData} removeData={removeData} />
+        </table>
+    )
 }
 
 export default Table;
