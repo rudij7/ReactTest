@@ -30,13 +30,14 @@ const TableBody = (props) => {
         
         
     }
+    useEffect(() => {setThing(props.thing.value)})
     const rows =  (
             <tr>
                 <td>{props.thing.id}</td>
         <td><input type="text" value={thing} onChange={e =>setThing(e.target.value)} disabled={disabled}></input></td>
                 <td>
                     &nbsp;<button onClick={editText}>{buttonText}</button>&nbsp;&nbsp;
-                    <button onClick={props.removeData}>Delete</button>
+                    <button onClick={() => props.removeData(props.index)}>Delete</button>
                 </td>
             </tr>
         )
@@ -47,12 +48,11 @@ const TableBody = (props) => {
 
 const Table = (props) => {
     const { tableData, removeData, handleChange } = props
-    console.log(tableData);
     return (
       
         <table>
             <TableHeader />
-    {props.tableData.map((row, index) => <TableBody index={index} key={index} thing={row} removeData={() => removeData(index)} handleChange={handleChange} /> )}
+    {props.tableData.map((row, index) => <TableBody index={index} key={index} thing={row} removeData={removeData} handleChange={handleChange} /> )}
         
             
         </table>
