@@ -31,7 +31,6 @@ const TableBody = (props) => {
         
     }
     useEffect(() => {setThing(props.thing.value)}, [props.thing])
-    console.log(props.thing);
     const rows =  (
             <tr>
                 <td>{props.thing.id}</td>
@@ -52,7 +51,6 @@ const Table = (props) => {
     return (
       
         <table>
-            {console.log(tableData)}
             <TableHeader />
     {props.tableData.map((row, index) => <TableBody index={index} key={index} thing={row} removeData={removeData} handleChange={handleChange} /> )}
         
