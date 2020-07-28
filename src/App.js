@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     handleChange = (value, index, id) => {    
-    
+        const { tableData } = this.state;
         const newTableData = [
             ...tableData.slice(0, index),{id:id, value:value},
             ...tableData.slice(index+1)
@@ -24,9 +24,11 @@ class App extends Component {
 
     removeData = (index) => {
         const { tableData } = this.state;
-        var table = [...this.state.tableData];
-        table.splice(index, 1);
-        this.setState({tableData: table});
+        const newTableData = [
+            ...tableData.slice(0, index),
+            ...tableData.slice(index+1)
+          ];
+        this.setState({tableData: newTableData});
     };
 
     render() {
